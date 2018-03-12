@@ -20,11 +20,11 @@
             <div class="style-filter">
                 <div class="style-title">Beer Style</div>
                 <ul data-bind="foreach: beerStyles">
-                    <li>
-                        <label data-bind="attr{for: id}">
-                            <input type="radio" data-bind="attr{id: id}, checked: $parent.changeStyle.bind($data)" name="style-set" />
+                    <li >
+                        <label data-bind="attr: { 'for': id }, click: $parent.changeStyle.bind($data)">
+                            <input type="radio" data-bind="attr: { 'id':id}" name="styleset" />
                             <span></span>
-                            <!--ko text: name-->
+                            <!--ko text:  name -->
                             <!--/ko-->
                         </label>
                     </li>
@@ -36,15 +36,16 @@
                     <div class="range-control">
                         <div class="range-slider" id="slider-range" data-max-range="23" data-min-range="0"></div>
                         <div class="clearfix">
-                            <input type="text" class="min-amt range-val flt-l" readonly value="0">
+                            <input type="text" data-bind="value: abvMinFilter" class="min-amt range-val flt-l" readonly value="0">
                             <input type="text" class="max-amt range-val flt-r text-right" readonly value="8">
                         </div>
                     </div>
+                    <div data-bind="text: abvMinFilter"></div>
                 </div>
                 <div class="filter-box">
                     <div class="title">IBU:</div>
                     <div class="range-control">
-                        <div class="range-slider" id="slider-range-2"  data-max-range="8" data-min-range="0"></div>
+                        <div class="range-slider" id="slider-range-2" data-max-range="8" data-min-range="0"></div>
                         <div class="clearfix">
                             <input type="text" class="min-amt range-val flt-l" readonly value="0">
                             <input type="text" class="max-amt range-val flt-r text-right" readonly value="23">
@@ -57,7 +58,7 @@
             <div class="product-list">
                 <div class="scroll-panel ">
                     <div class="list-title">Results</div>
-                    <ul data-bind="foreach: beer">
+                    <ul data-bind="foreach: beerFilter">
                         <li data-bind="text: name, click: $parent.setCurrent.bind($data)"></li>
                     </ul>
                 </div>
@@ -87,13 +88,13 @@
                                 <td data-bind="text: currentProduct().abv ? currentProduct().abv : ''">5.5%</td>
                                 <td data-bind="text: currentProduct().ibu ? currentProduct().ibu : ''">41</td>
                                 <td>7</td>
-                                <td  data-bind="text: currentProduct().isOrganic ? currentProduct().isOrganic : ''">N/A</td>
+                                <td data-bind="text: currentProduct().isOrganic ? currentProduct().isOrganic : ''">N/A</td>
                             </tr>
                         </table>
                     </div>
                     <div class="stlye-panel">
                         <div class="title">Style</div>
-                        <div class="info"  data-bind="text: currentProduct().style ? currentProduct().style.name : ''" ></div>
+                        <div class="info" data-bind="text: currentProduct().style ? currentProduct().style.name : ''"></div>
                     </div>
                     <div class="manufacturer-panel">
                         <div class="title">Brewed By</div>
