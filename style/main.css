@@ -33,12 +33,39 @@ body {
 .text-right {
     text-align: right;
 }
-
+.loading-panel {
+    background: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+.loading-panel .content-block {
+    position: absolute;
+    width: 180px;
+    height: 72px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    margin: auto;
+    text-align: center;
+    background: #fff;
+    font-size: 16px;
+    padding: 10px;
+}
+.loading-panel .content-block img {
+    width: 30px;
+    margin: 8PX 10px;
+}
 /* header */
 .header-panel {
     height: 160px;
     background: #c4c9ca;
-    padding: 35px 22px;
+    padding: 35px 22px 26px;
     box-sizing: border-box;
     display: flex;
     position: absolute;
@@ -49,12 +76,17 @@ body {
 }
 .header-panel > div:first-child {
     width: 75%;
+    overflow: auto;
 }
 .header-panel > div {
     flex-grow: 1;
-    width: 25%;
-}
 
+}
+.header-panel > div:last-child {
+    width: 25%;
+    padding: 0 0 0 50px;
+    box-sizing: border-box;
+}
 .style-title {
     margin:0 0 10px;
 }
@@ -74,6 +106,7 @@ body {
 }
 .product-list {
     min-width: 240px;
+    max-width: 240px;
    background: #e5e5e5;
    padding: 5px 5px 0 0;
 }
@@ -111,12 +144,14 @@ body {
 }
 .img-panel {
     min-width: 350px;
+    max-width: 350px;
     height: 390px;
     padding: 0 30px 0 0;
     
 }
 .img-panel img
 {
+    max-width: 100%;
     -webkit-box-shadow: 0px 0px 50px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 50px -9px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 50px -9px rgba(0,0,0,0.75);
@@ -166,7 +201,7 @@ label {
     display: inline-block
   }
   
-  label input[type="checkbox"] {
+  label input[type="radio"] {
     visibility: hidden;
     margin: 0;
     width: 0;
@@ -174,7 +209,7 @@ label {
     float: left
   }
   
-  label input[type="checkbox"] + span {
+  label input[type="radio"] + span {
     background-image: url("../images/control-sprite.png");
     background-repeat: no-repeat;
     background-position: 0 -22px;
@@ -188,22 +223,22 @@ label {
     margin: 0px 10px 10px 0
   }
   
-  label input[type="checkbox"] + span:hover,
-  label:hover input[type="checkbox"] + span {
+  label input[type="radio"] + span:hover,
+  label:hover input[type="radio"] + span {
     background-position: 0 -44px
   }
   
-  label input[type="checkbox"]:disabled + span,
-  label:hover input[type="checkbox"]:disabled + span  {
+  label input[type="radio"]:disabled + span,
+  label:hover input[type="radio"]:disabled + span  {
     background-position: 0px -33px
   }
   
-  label input[type="checkbox"]:checked + span,
-  label:hover input[type="checkbox"]:checked + span  {
+  label input[type="radio"]:checked + span,
+  label:hover input[type="radio"]:checked + span  {
     background-position: 0 0px
   }
   
-  label input[type="checkbox"]:checked + span:hover {
+  label input[type="radio"]:checked + span:hover {
     background-position: 0 -22px
   }
   label:hover {
