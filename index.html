@@ -11,103 +11,21 @@
 
     <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/knockout-3.4.2.js"></script>
 </head>
 
 <body class="page-product-detail">
-    <div class="wrapper">
+    <div class="wrapper" id="product-detail">
         <div class="header-panel">
             <div class="style-filter">
                 <div class="style-title">Beer Style</div>
-                <ul>
+                <ul data-bind="foreach: beerStyles">
                     <li>
-                        <label for="text-checkbox-1">
-                            <input type="checkbox" name="test-checkbox-2" id="text-checkbox-1" />
+                        <label data-bind="attr{for: id}">
+                            <input type="radio" data-bind="attr{id: id}, checked: $parent.changeStyle.bind($data)" name="style-set" />
                             <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox-2">
-                            <input type="checkbox" name="test-checkbox-2" id="text-checkbox-2" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
-                        </label>
-                    </li>
-                    <li>
-                        <label for="text-checkbox">
-                            <input type="checkbox" name="test-checkbox" id="text-checkbox" />
-                            <span></span>
-                            Sample Check box
+                            <!--ko text: name-->
+                            <!--/ko-->
                         </label>
                     </li>
                 </ul>
@@ -116,7 +34,7 @@
                 <div class="filter-box">
                     <div class="title">ABV:</div>
                     <div class="range-control">
-                        <div class="range-slider" id="slider-range" data-max-range="8" data-min-range="0"></div>
+                        <div class="range-slider" id="slider-range" data-max-range="23" data-min-range="0"></div>
                         <div class="clearfix">
                             <input type="text" class="min-amt range-val flt-l" readonly value="0">
                             <input type="text" class="max-amt range-val flt-r text-right" readonly value="8">
@@ -126,7 +44,7 @@
                 <div class="filter-box">
                     <div class="title">IBU:</div>
                     <div class="range-control">
-                        <div class="range-slider" id="slider-range-2" data-max-range="23" data-min-range="0"></div>
+                        <div class="range-slider" id="slider-range-2"  data-max-range="8" data-min-range="0"></div>
                         <div class="clearfix">
                             <input type="text" class="min-amt range-val flt-l" readonly value="0">
                             <input type="text" class="max-amt range-val flt-r text-right" readonly value="23">
@@ -139,34 +57,24 @@
             <div class="product-list">
                 <div class="scroll-panel ">
                     <div class="list-title">Results</div>
-                    <ul>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
-                        <li>Lamborgini</li>
+                    <ul data-bind="foreach: beer">
+                        <li data-bind="text: name, click: $parent.setCurrent.bind($data)"></li>
                     </ul>
                 </div>
             </div>
             <div class="product-detail">
                 <div class="img-panel">
-                    <img src="images/no-img.png" />
+                    <img data-bind="attr: {src: currentProduct().labels ? currentProduct().labels.large : 'images/no-img.png'}" />
                 </div>
                 <div class="info-panel">
-                    <div><h1>Far Far Away
-                        <sup>TM</sup>
-                    </h1>
-                </div>
-                    <p class="info-desc">An Australian Pale Ale brewed exclusively with Galaxy hops. It pours light gold and has a hoppy aroma and flavor. Balanced slightly more toward the bitter side, it has notes of tropical fruit and is backed-up by light caramel malts in the background.</p>
+                    <div>
+                        <h1>
+                            <!--ko text: currentProduct().nameDisplay -->
+                            <!--/ko-->
+                            <sup>TM</sup>
+                        </h1>
+                    </div>
+                    <p class="info-desc" data-bind="text: currentProduct().description ? currentProduct().description : ''"></p>
                     <div class="info-volume">
                         <table width="100%">
                             <tr>
@@ -176,16 +84,16 @@
                                 <th>OG</th>
                             </tr>
                             <tr>
-                                <td>5.5%</td>
-                                <td>41</td>
+                                <td data-bind="text: currentProduct().abv ? currentProduct().abv : ''">5.5%</td>
+                                <td data-bind="text: currentProduct().ibu ? currentProduct().ibu : ''">41</td>
                                 <td>7</td>
-                                <td>N/A</td>
+                                <td  data-bind="text: currentProduct().isOrganic ? currentProduct().isOrganic : ''">N/A</td>
                             </tr>
                         </table>
                     </div>
                     <div class="stlye-panel">
                         <div class="title">Style</div>
-                        <div class="info">Australian-Style Pale Ale</div>
+                        <div class="info"  data-bind="text: currentProduct().style ? currentProduct().style.name : ''" ></div>
                     </div>
                     <div class="manufacturer-panel">
                         <div class="title">Brewed By</div>
@@ -195,9 +103,19 @@
             </div>
         </div>
     </div>
+    <div class="loading-panel" style="display: none;">
+        <div class="content-block">
+            <div>
+                <img src="images/loading.gif" />
+            </div>
+            <div class="loader">Loading</div>
+        </div>
+    </div>
     <!-- custom scripting files -->
     <script type="text/javascript" src="js/beer.ui.js"></script>
+    <script type="text/javascript" src="js/beer.config.js"></script>
     <script type="text/javascript" src="js/beer.productDetail.js"></script>
+    <script type="text/javascript" src="js/beer.productDetail.KO.js"></script>
 </body>
 
 </html>
