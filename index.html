@@ -94,7 +94,7 @@
                                 <tr>
                                     <td data-bind="text: currentProduct().abv ? currentProduct().abv : ''">5.5%</td>
                                     <td data-bind="text: currentProduct().ibu ? currentProduct().ibu : ''">41</td>
-                                    <td>7</td>
+                                    <td data-bind="text: currentProduct().style  ? currentProduct().style.srmMin  : ''">7</td>
                                     <td data-bind="text: currentProduct().isOrganic ? currentProduct().isOrganic : ''">N/A</td>
                                 </tr>
                             </table>
@@ -102,10 +102,6 @@
                         <div class="stlye-panel">
                             <div class="title">Style</div>
                             <div class="info" data-bind="text: currentProduct().style ? currentProduct().style.name : ''"></div>
-                        </div>
-                        <div class="manufacturer-panel">
-                            <div class="title">Brewed By</div>
-                            <div class="info">Eudora Brewing Company</div>
                         </div>
                     </div>
                 </div>

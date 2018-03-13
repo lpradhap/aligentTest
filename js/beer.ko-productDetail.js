@@ -30,7 +30,9 @@ BeerApp.ProductDetailKo = (function () {
 
             //Set Current Product
             self.setCurrent = function (current) {
+                
                 self.currentProduct(current)
+                console.log(self.currentProduct())
             };
 
             self.beerFilter = ko.computed(function () {
