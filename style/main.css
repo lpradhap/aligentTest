@@ -98,11 +98,12 @@ body {
 .body-panel {
     padding: 160px 0 0 0 ;
     height: 100%;
-    display: flex;
+    display: table;
     box-sizing: border-box
 }
 .body-panel > div{
-    flex-grow: 1;
+    display: table-cell;
+    vertical-align: top;
 }
 .product-list {
     min-width: 240px;
@@ -134,13 +135,17 @@ body {
 
 /* product details */
 .product-detail {
-    padding: 70px 40px;
+    padding: 70px 40px 40px;
     box-sizing: border-box;
-    display: flex;
+    
 }
 .product-detail > div {
-    flex-grow: 1;
+    display: table;
     color: #4e5456;
+}
+.product-detail > div > div {
+    display: table-cell;
+    vertical-align: top;
 }
 .img-panel {
     min-width: 350px;

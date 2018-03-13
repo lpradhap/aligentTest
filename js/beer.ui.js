@@ -7,6 +7,25 @@ BeerApp.UI = (function () {
 
     ui.init = function () {
         //initiate all UI functions
+        $('body').on('click', '.product-list li', function () {
+
+            //set prodcut list height
+            BeerApp.UI.productListHeight.setHeight()
+        })
+    }
+
+    ui.productListHeight = {
+        _panel: $('.product-list .scroll-panel'),
+        setHeight: function () {
+            //clear set height
+            ui.productListHeight._panel.css('height','')
+            
+            let windowH = $(document).height();
+            let headerH = $('.header-panel').innerHeight();
+
+            //set new height
+            ui.productListHeight._panel.height((windowH - headerH) - 5)
+        }
     }
 
     ui.rangeSlider = function () {
@@ -46,8 +65,9 @@ BeerApp.UI = (function () {
     }
 
     return ui
+
 })()
 
 $(document).ready(function () {
-    BeerApp.UI.init()
+    BeerApp.UI.init();
 })

@@ -61,45 +61,47 @@
                         <li data-bind="text: name, click: $parent.setCurrent.bind($data)"></li>
                     </ul>
                     <div class="no-results-filters" data-bind="visible: beerFilter() == ''">No Results</div>
-                    
+
                 </div>
             </div>
             <div class="product-detail" data-bind="if: currentProduct()">
-                <div class="img-panel">
-                    <img data-bind="attr: {src: currentProduct().labels ? currentProduct().labels.large : 'images/no-img.png'}" />
-                </div>
-                <div class="info-panel">
-                    <div>
-                        <h1>
-                            <!--ko text: currentProduct().nameDisplay -->
-                            <!--/ko-->
-                            <sup>TM</sup>
-                        </h1>
+                <div class="product-detail-panel">
+                    <div class="img-panel">
+                        <img data-bind="attr: {src: currentProduct().labels ? currentProduct().labels.large : 'images/no-img.png'}" />
                     </div>
-                    <p class="info-desc" data-bind="text: currentProduct().description ? currentProduct().description : ''"></p>
-                    <div class="info-volume">
-                        <table width="100%">
-                            <tr>
-                                <th>ABV</th>
-                                <th>IBU</th>
-                                <th>SRM</th>
-                                <th>OG</th>
-                            </tr>
-                            <tr>
-                                <td data-bind="text: currentProduct().abv ? currentProduct().abv : ''">5.5%</td>
-                                <td data-bind="text: currentProduct().ibu ? currentProduct().ibu : ''">41</td>
-                                <td>7</td>
-                                <td data-bind="text: currentProduct().isOrganic ? currentProduct().isOrganic : ''">N/A</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="stlye-panel">
-                        <div class="title">Style</div>
-                        <div class="info" data-bind="text: currentProduct().style ? currentProduct().style.name : ''"></div>
-                    </div>
-                    <div class="manufacturer-panel">
-                        <div class="title">Brewed By</div>
-                        <div class="info">Eudora Brewing Company</div>
+                    <div class="info-panel">
+                        <div>
+                            <h1>
+                                <!--ko text: currentProduct().nameDisplay -->
+                                <!--/ko-->
+                                <sup>TM</sup>
+                            </h1>
+                        </div>
+                        <p class="info-desc" data-bind="text: currentProduct().description ? currentProduct().description : ''"></p>
+                        <div class="info-volume">
+                            <table width="100%">
+                                <tr>
+                                    <th>ABV</th>
+                                    <th>IBU</th>
+                                    <th>SRM</th>
+                                    <th>OG</th>
+                                </tr>
+                                <tr>
+                                    <td data-bind="text: currentProduct().abv ? currentProduct().abv : ''">5.5%</td>
+                                    <td data-bind="text: currentProduct().ibu ? currentProduct().ibu : ''">41</td>
+                                    <td>7</td>
+                                    <td data-bind="text: currentProduct().isOrganic ? currentProduct().isOrganic : ''">N/A</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="stlye-panel">
+                            <div class="title">Style</div>
+                            <div class="info" data-bind="text: currentProduct().style ? currentProduct().style.name : ''"></div>
+                        </div>
+                        <div class="manufacturer-panel">
+                            <div class="title">Brewed By</div>
+                            <div class="info">Eudora Brewing Company</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,7 +119,7 @@
     <script type="text/javascript" src="js/beer.ui.js"></script>
     <script type="text/javascript" src="js/beer.config.js"></script>
     <script type="text/javascript" src="js/beer.productDetail.js"></script>
-    <script type="text/javascript" src="js/beer.productDetail.KO.js"></script>
+    <script type="text/javascript" src="js/beer.ko-productDetail.js"></script>
 </body>
 
 </html>
