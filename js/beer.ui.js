@@ -6,7 +6,7 @@ BeerApp.UI = (function () {
     const ui = {};
 
     ui.init = function () {
-        
+        //initiate all UI functions
     }
 
     ui.rangeSlider = function () {
@@ -25,8 +25,8 @@ BeerApp.UI = (function () {
                 max: maxRange,
                 values: [minRange, maxRange],
                 slide: function (event, ui) {
-                    $(this).closest('.range-control').find(".min-amt").val(ui.values[0]);
-                    $(this).closest('.range-control').find(".max-amt").val(ui.values[1]);
+                    $(this).closest('.range-control').find(".min-amt").val(ui.values[0]).change();
+                    $(this).closest('.range-control').find(".max-amt").val(ui.values[1]).change();
                 }
             });
         })

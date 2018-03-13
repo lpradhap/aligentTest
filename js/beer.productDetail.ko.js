@@ -1,4 +1,3 @@
-
 var BeerApp = BeerApp || {};
 
 BeerApp.ProductDetailKo = (function () {
@@ -11,39 +10,44 @@ BeerApp.ProductDetailKo = (function () {
         _Style: 108
     }
 
-
-
     dev.init = function () {
-        
+
         function OrderProductDetailViewModel() {
             var self = this;
 
             //declare observables
             self.beerStyles = ko.observableArray([]);
             self.beer = ko.observableArray([]);
-            self.currentProduct = ko.observable([]);
+            self.currentProduct = ko.observable(false);
 
             self.filteredBeerStyles = ko.observableArray([]);
 
-            self.abvMaxFilter = ko.observable();
-            self.abvMinFilter = ko.observable('8');
-            self.ibuMaxFilter = ko.observable();
-            self.ibuMinFilter = ko.observable();
-
-            self.currentFilter = ko.observable();
-
-            //self.currentFilter(false);
+            //range slider filters
+            self.abvMaxFilter = ko.observable("23");
+            self.abvMinFilter = ko.observable("0");
+            self.ibuMaxFilter = ko.observable("100");
+            self.ibuMinFilter = ko.observable("0");
 
             //Set Current Product
             self.setCurrent = function (current) {
-
                 self.currentProduct(current)
             };
 
             self.beerFilter = ko.computed(function () {
-                return self.beer();
-            })
 
+                var filterProducts = [];
+                ko.utils.arrayForEach(self.beer(), function (item) {
+
+                    if (parseFloat(item.abv) > parseFloat(self.abvMinFilter()) &&
+                        parseFloat(item.abv) < parseFloat(self.abvMaxFilter()) &&
+                        parseFloat(item.ibu) > parseFloat(self.ibuMinFilter()) &&
+                        parseFloat(item.ibu) < parseFloat(self.ibuMaxFilter())) {
+                        filterProducts.push(item)
+                    }
+                });
+
+                return filterProducts;
+            })
 
             self.changeStyle = function (setStyle) {
 
@@ -55,22 +59,6 @@ BeerApp.ProductDetailKo = (function () {
 
                 return true;
             }
-
-
-            self.filteredItems = ko.computed(function () {
-                if (!self.currentFilter()) {
-
-                    return self.beerStyles();
-                }
-                else {
-                    //No need to check this condition for returning checked values but it will check with whole array list
-                    self.filteredBeerStyles.push(ko.utils.arrayFilter(self.beerStyles(), function (prod) {
-                        return prod.id == self.currentFilter().id;
-                    }));
-                }
-            });
-
-
 
             //get inital styles
             $.getJSON(BeerApp.Config.info.baseUrl + "styles/?" + "key=" + BeerApp.Config.info.key + "&format=json", function (response) {
@@ -104,6 +92,7 @@ BeerApp.ProductDetailKo = (function () {
         var el = document.getElementById('product-detail')
         var viewModel = new OrderProductDetailViewModel();
         ko.applyBindings(viewModel, el);
+
     }
 
     return dev;

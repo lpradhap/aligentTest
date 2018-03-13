@@ -195,7 +195,11 @@ body {
     overflow: auto;
 }
 
-
+.no-results-filters {
+    padding: 13px;
+    text-align: center;
+    color: red;
+}
 /* control styling */
 label {
     display: inline-block
