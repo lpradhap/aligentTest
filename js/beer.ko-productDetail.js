@@ -7,7 +7,7 @@ BeerApp.ProductDetailKo = (function () {
     var dev = {}
 
     dev.default = {
-        _Style: 108
+        _Style: 1
     }
 
     dev.init = function () {
@@ -18,23 +18,23 @@ BeerApp.ProductDetailKo = (function () {
             //declare observables
             self.beerStyles = ko.observableArray([]);
             self.beer = ko.observableArray([]);
-            self.currentProduct = ko.observable(false);
-
-            self.filteredBeerStyles = ko.observableArray([]);
-
+            self.currentProduct = ko.observable("");
+            self.styleOnCollection = ko.observableArray([dev.default._Style]);
+            self.ProductactiveId = ko.observable('');
             //range slider filters
-            self.abvMaxFilter = ko.observable("23");
+            self.abvMaxFilter = ko.observable("67.5");
             self.abvMinFilter = ko.observable("0");
             self.ibuMaxFilter = ko.observable("100");
             self.ibuMinFilter = ko.observable("0");
 
             //Set Current Product
             self.setCurrent = function (current) {
-                
+                self.ProductactiveId(current.id)
                 self.currentProduct(current)
-                console.log(self.currentProduct())
             };
 
+
+            //filter the beer data with the filers
             self.beerFilter = ko.computed(function () {
 
                 var filterProducts = [];
@@ -51,15 +51,50 @@ BeerApp.ProductDetailKo = (function () {
                 return filterProducts;
             })
 
-            self.changeStyle = function (setStyle) {
+            //update style click and udpate beer information
+            self.updatStyle = function (el, event) {
+                var fetchData = true;
 
-                //loader show
-                BeerApp.UI.loader.show();
+                //check style information already populated
+                ko.utils.arrayForEach(self.styleOnCollection(),
+                    function (item) {
+                        if (el.id === item) {
 
-                //send selected new style id to getbeer information
-                self.getBeer(setStyle.id);
+                            //remove style information from beer observable
+                            self.beer.remove(function (item) {
+                                return item.style.id == el.id;
+                            });
 
-                return true;
+                            //clear active product information
+                            self.currentProduct(null);
+                            self.ProductactiveId(null)
+
+                            //disable fetching data
+                            fetchData = false;
+                        }
+                    });
+
+                //fetch data only if  fetchData is true
+                if (fetchData) {
+                    //loader show
+                    BeerApp.UI.loader.show();
+
+                    //clear active product information
+                    self.currentProduct(null);
+                    self.ProductactiveId(null)
+
+                    //add to style populated it collection
+                    self.styleOnCollection.push(el.id)
+
+                    //send selected new style id to getbeer information
+                    self.getBeer(el.id);
+                } else {
+                    //remove style populated collection with selected
+                    self.styleOnCollection.remove(el.id)
+                }
+
+                return false;
+
             }
 
             //get inital styles
@@ -78,12 +113,21 @@ BeerApp.ProductDetailKo = (function () {
                 var styleId = val ? val : dev.default._Style;
 
                 $.getJSON(BeerApp.Config.info.baseUrl + "beers?styleId=" + styleId + "&" + "key=" + BeerApp.Config.info.key + "&format=json", function (response) {
+                    ko.utils.arrayPushAll(self.beer, response.data)
 
-                    self.beer(response.data)
 
                     //hide loader
                     BeerApp.UI.loader.hide();
                 })
+            }
+
+            //check if style is active
+            self.findActiveStyle = function (el) {
+                let status = ko.utils.arrayFirst(self.styleOnCollection(),
+                    function (item) {
+                        return el.id === item;
+                    });
+                return status
             }
 
             //get initial beer information

@@ -77,6 +77,7 @@ body {
 .header-panel > div:first-child {
     width: 75%;
     overflow: auto;
+    padding: 0 18px 0 0;
 }
 .header-panel > div {
     flex-grow: 1;
@@ -93,6 +94,9 @@ body {
 .style-filter li {
     float: left;
     width: 25%;
+}
+.style-filter li:nth-child(4n + 1) {
+    clear: left;
 }
 .mobile-menu {
     display: none;
@@ -213,7 +217,7 @@ label {
     display: inline-block
   }
   
-  label input[type="radio"] {
+  label input[type="checkbox"] {
     visibility: hidden;
     margin: 0;
     width: 0;
@@ -221,7 +225,7 @@ label {
     float: left
   }
   
-  label input[type="radio"] + span {
+  label input[type="checkbox"] + span {
     background-image: url("../images/control-sprite.png");
     background-repeat: no-repeat;
     background-position: 0 -22px;
@@ -235,22 +239,22 @@ label {
     margin: 0px 10px 10px 0
   }
   
-  label input[type="radio"] + span:hover,
-  label:hover input[type="radio"] + span {
+  label input[type="checkbox"] + span:hover,
+  label:hover input[type="checkbox"] + span {
     background-position: 0 -44px
   }
   
-  label input[type="radio"]:disabled + span,
-  label:hover input[type="radio"]:disabled + span  {
+  label input[type="checkbox"]:disabled + span,
+  label:hover input[type="checkbox"]:disabled + span  {
     background-position: 0px -33px
   }
   
-  label input[type="radio"]:checked + span,
-  label:hover input[type="radio"]:checked + span  {
+  label input[type="checkbox"]:checked + span,
+  label:hover input[type="checkbox"]:checked + span  {
     background-position: 0 0px
   }
   
-  label input[type="radio"]:checked + span:hover {
+  label input[type="checkbox"]:checked + span:hover {
     background-position: 0 -22px
   }
   label:hover {

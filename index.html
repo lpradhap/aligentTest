@@ -22,9 +22,9 @@
             <div class="style-filter">
                 <div class="style-title">Beer Style</div>
                 <ul data-bind="foreach: beerStyles">
-                    <li>
-                        <label data-bind="attr: { 'for': id }, click: $parent.changeStyle.bind($data)">
-                            <input type="radio" data-bind="attr: { 'id':id}" name="styleset" />
+                    <li data-bind="click: $parent.updatStyle.bind($data)">
+                        <label data-bind="attr: { 'for': id }">
+                            <input type="checkbox" data-bind="attr: { 'id':id}, checked: $parent.findActiveStyle($data)" name="styleset" />
                             <span></span>
                             <!--ko text:  name -->
                             <!--/ko-->
@@ -63,7 +63,7 @@
                 <div class="scroll-panel ">
                     <div class="list-title">Results</div>
                     <ul data-bind="foreach: beerFilter">
-                        <li data-bind="text: name, click: $parent.setCurrent.bind($data)"></li>
+                        <li data-bind="text: name, click: $parent.setCurrent.bind($data), css: {'current': $root.ProductactiveId() == id}"></li>
                     </ul>
                     <div class="no-results-filters" data-bind="visible: beerFilter() == ''">No Results</div>
 
